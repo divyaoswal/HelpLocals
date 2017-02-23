@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<form name="login_form" method="POST" action="{{ url_for('users.login') }}">
+				{{ login_form.csrf_token }}
+				<h3>Login</h3>
+			    <p>Email {{ login_form.email(placeholder="email") }}
+				    <span>
+				      {% if login_form.email.errors %}
+				        {% for error in login_form.email.errors %}
+				          {{ error }}
+				        {% endfor %}
+				      {% endif %}
+				    </span>
+			    </p>
+			    <p>Password {{ login_form.password(placeholder="password") }}
+				    <span>
+				      {% if login_form.password.errors %}
+				        {% for error in login_form.password.errors %}
+				          {{ error }}
+				        {% endfor %}
+				      {% endif %}
+				    </span>
+  				</p>
+  				<button type="submit">Log In</button>
+			</form>
+		</div>
+
+		<div class="col-md-offset-4 col-md-4">
+			<form method="POST" action="{{ url_for('users.login') }}">
+				{{ create_form.csrf_token }}
+				<h3>Create Account</h3>
+			    <p>Email {{ create_form.email(placeholder="email") }}
+				    <span>
+				      {% if create_form.email.errors %}
+				        {% for error in create_form.email.errors %}
+				          {{ error }}
+				        {% endfor %}
+				      {% endif %}
+				    </span>
+			    </p>
+			    <p>Password {{ create_form.password(placeholder="password") }}
+				    <span>
+				      {% if create_form.password.errors %}
+				        {% for error in create_form.password.errors %}
+				          {{ error }}
+				        {% endfor %}
+				      {% endif %}
+				    </span>
+  				</p>
+  				<p>Zipcode {{ create_form.zipcode(placeholder="zipcode") }}
+				    <span>
+				      {% if create_form.zipcode.errors %}
+				        {% for error in create_form.zipcode.errors %}
+				          {{ error }}
+				        {% endfor %}
+				      {% endif %}
+				    </span>
+  				</p>
+  				<button type="submit">Create account</button>
+  			</form>	
+		</div>
+	</div>
+</div>		    
+
+
+
+
+{% endblock %}
