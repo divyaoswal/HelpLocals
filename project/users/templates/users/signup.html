@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="POST" action="{{ url_for('users.signup') }}">
+	{{ form.csrf_token }}
+	{% if error %}
+		{{ error }}
+	{% endif %}	
+	<h3>Create Account</h3>
+	<p>Email {{ form.email(placeholder="email") }}
+	    <span>
+	      {% if form.email.errors %}
+	        {% for error in form.email.errors %}
+	          {{ error }}
+	        {% endfor %}
+	      {% endif %}
+	    </span>
+	</p>
+	<p>Password {{ form.password(placeholder="password") }}
+	    <span>
+	      {% if form.password.errors %}
+	        {% for error in form.password.errors %}
+	          {{ error }}
+	        {% endfor %}
+	      {% endif %}
+	    </span>
+	</p>
+	<p>Zipcode {{ form.zipcode(placeholder="zipcode") }}
+	    <span>
+	      {% if form.zipcode.errors %}
+	        {% for error in form.zipcode.errors %}
+	          {{ error }}
+	        {% endfor %}
+	      {% endif %}
+	    </span>
+	</p>
+	<button type="submit">Sign Up</button>
+</form>	
+{% endblock %}

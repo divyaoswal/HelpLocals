@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="personal">
+	<form method="POST" action="{{ url_for('posts.new', user_id=user_id) }}">
+	<!-- if you dont include this leads to error - bad request csrf token is missing. you can verify by doing post_form.data or post_form.errors -->
+		{{ post_form.csrf_token }}  
+		<fieldset>
+			<legend>Personal Information</legend>
+		    <p>Contact Name <span class="required">*</span>
+		    {{ post_form.contactName(placeholder="contact name") }}
+			    <span>
+			      {% if post_form.contactName.errors %}
+			        {% for error in post_form.contactName.errors %}
+			          {{ error }}
+			        {% endfor %}
+			      {% endif %}
+			    </span>
+				</p>	 			
+		    <p>Phone Number <span class="required">*</span>
+		    {{ post_form.phoneNo(placeholder="phoneNo") }}
+			    <span>
+			      {% if post_form.phoneNo.errors %}
+			        {% for error in post_form.phoneNo.errors %}
+			          {{ error }}
+			        {% endfor %}
+			      {% endif %}
+			    </span>
+				</p>	
+		    <p>Street <span class="required">*</span>
+		    {{ post_form.street(placeholder="street") }}
+			    <span>
+			      {% if post_form.street.errors %}
+			        {% for error in post_form.street.errors %}
+			          {{ error }}
+			        {% endfor %}
+			      {% endif %}
+			    </span>
+				</p>	
+		    <p>City <span class="required">*</span>
+		    {{ post_form.city(placeholder="city") }}
+			    <span>
+			      {% if post_form.city.errors %}
+			        {% for error in post_form.city.errors %}
+			          {{ error }}
+			        {% endfor %}
+			      {% endif %}
+			    </span>
+				</p>									
+		</fieldset>
+		<fieldset><legend>Item details</legend>
+			<p>Price <span class="required">*</span>
+		     {{ post_form.price(placeholder="price") }}
+			    <span>
+			      {% if post_form.price.errors %}
+			        {% for error in post_form.postTitle.errors %}
+			          {{ error }}
+			        {% endfor %}
+			      {% endif %}
+			    </span>
+				</p>	
+			<p>Item Title <span class="required">*</span>
+		     {{ post_form.title(placeholder="title") }}
+			    <span>
+			      {% if post_form.title.errors %}
+			        {% for error in post_form.title.errors %}
+			          {{ error }}
+			        {% endfor %}
+			      {% endif %}
+			    </span>
+				</p>	
+			<p>
+				<span>Items Description <span class="required"></span>
+				{{post_form.description}}
+				</span>
+				<span>
+			      {% if post_form.description.errors %}
+			        {% for error in post_form.description.errors %}
+			          {{ error }}
+			        {% endfor %}
+			      {% endif %}
+			    </span>
+			</p>	
+		</fieldset>
+		<br>
+		<button type="submit">continue</button>
+	</form>
+</div>		
+
+{% endblock %}

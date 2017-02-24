@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<script>
+  UPLOADCARE_PUBLIC_KEY = "01ce893a4876c84ccedd";
+</script>
+<script charset="utf-8" src="//ucarecdn.com/libs/widget/2.10.3/uploadcare.full.min.js"></script>
 <div class="container">
 	<div class="row">
 		<div class="upload">
-			<form method="POST" enctype=multipart/form-data action="{{ url_for('posts.upload_files') }}">
+			<form method="POST" enctype=multipart/form-data action="{{ url_for('images.upload_files', user_id=user_id, post_id=post_id) }}">
 				{{ upload_form.csrf_token }}
+				<input type="hidden" data-multiple="true" role="uploadcare-uploader" name="image" />
 				<fieldset>
-				    <p>{{ upload_form.image }}
+				    <p>
 					    <span>
 					      {% if upload_form.image.errors %}
 					        {% for error in upload_form.image.errors %}
@@ -19,7 +24,6 @@
          			<img id="images"/>
          			<script>
          				document.getElementById('image').onchange = function(event){
-         					console.log("dssdsf");
 						    var images = document.getElementById('images');
 						    images.src = URL.createObjectURL(event.target.files[0]);
          				}

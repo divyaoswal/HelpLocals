@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="POST" action="{{ url_for('users.login') }}">
+	{{ form.csrf_token }}
+	<h3>Login</h3>
+    <p>Email {{ form.email(placeholder="email") }}
+	    <span>
+	      {% if form.email.errors %}
+	        {% for error in form.email.errors %}
+	          {{ error }}
+	        {% endfor %}
+	      {% endif %}
+	    </span>
+    </p>
+    <p>Password {{ form.password(placeholder="password") }}
+	    <span>
+	      {% if form.password.errors %}
+	        {% for error in form.password.errors %}
+	          {{ error }}
+	        {% endfor %}
+	      {% endif %}
+	    </span>
+	</p>
+	<button type="submit">Log In</button>
+</form>
+	    
+
+
+
+
+{% endblock %}

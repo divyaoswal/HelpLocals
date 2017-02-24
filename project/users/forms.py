@@ -4,7 +4,7 @@ from wtforms import StringField, validators, PasswordField, IntegerField
 class CreateAccountForm(FlaskForm):
 	email = StringField('Email', [validators.DataRequired()])
 	password = PasswordField('Password', [validators.DataRequired()])
-	zipcode = StringField('Zipcode', [validators.DataRequired()])
+	zipcode = IntegerField('Zipcode', [validators.DataRequired()])
 
 
 class LoginForm(FlaskForm):
