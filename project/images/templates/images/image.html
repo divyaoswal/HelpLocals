@@ -7,11 +7,11 @@
 <script charset="utf-8" src="//ucarecdn.com/libs/widget/2.10.3/uploadcare.full.min.js"></script>
 <div class="container">
 	<div class="row">
-		<div class="upload">
-			<form method="POST" enctype=multipart/form-data action="{{ url_for('images.upload_files', user_id=user_id, post_id=post_id) }}">
-				{{ upload_form.csrf_token }}
-				<input type="hidden" data-multiple="true" role="uploadcare-uploader" name="image" />
+		<form method="POST" enctype=multipart/form-data action="{{ url_for('images.upload_files', user_id=user_id, post_id=post_id) }}">
+			{{ upload_form.csrf_token }}
+			<div class="upload">
 				<fieldset>
+				<input type="hidden" data-multiple="true" role="uploadcare-uploader" name="image" />
 				    <p>
 					    <span>
 					      {% if upload_form.image.errors %}
@@ -31,8 +31,8 @@
 					<br>
          			<input type=submit value=Upload>
          		</fieldset>	
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 </div>		
 

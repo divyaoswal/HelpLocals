@@ -1,4 +1,5 @@
 from project import db, bcrypt
+from datetime import datetime
 
 
 class User(db.Model):
@@ -28,10 +29,11 @@ class Post(db.Model):
 	price = db.Column(db.Integer)
 	title = db.Column(db.Text)
 	description = db.Column(db.Text)
+	timestamp = db.Column(db.DateTime)
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))  #what is users in users.id
 	images = db.relationship('Image', lazy='dynamic')
 
-	def __init__(self, contactName, phoneNo, street, city, price, title, description, user_id):
+	def __init__(self, contactName, phoneNo, street, city, price, title, description,user_id, timestamp=datetime.utcnow()):
 		self.contactName = contactName
 		self.phoneNo = phoneNo
 		self.street = street
@@ -39,6 +41,7 @@ class Post(db.Model):
 		self.price = price
 		self.title = title
 		self.description = description
+		self.timestamp = timestamp
 		self.user_id = user_id
 
 

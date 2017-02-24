@@ -1,9 +1,13 @@
 
-.header{
-	padding-top: 300px;
-	background-color: rgb(220, 174, 35);
+#header{
+	padding-top: 200px;
+    padding-bottom: 100px;
+	background-color: #EB3B88;
 }
 
+#all_posts{
+    background-color: #FFCBE2;
+}
 a:link{
 	text-decoration: none;
 }
@@ -18,7 +22,7 @@ a:hover{
 }
 
 .personal, .upload, .post{
-    max-width: 200px;
+    max-width: 500px
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 

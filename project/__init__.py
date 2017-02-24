@@ -23,10 +23,7 @@ from project.users.views import users_blueprint
 from project.posts.views import posts_blueprint
 from project.images.views import images_blueprint
 
-app.register_blueprint(users_blueprint, url_prefix='/users')   #pycache folder is created
+app.register_blueprint(users_blueprint, url_prefix='/')   #pycache folder is created
 app.register_blueprint(posts_blueprint, url_prefix='/users/<int:user_id>/posts')
 app.register_blueprint(images_blueprint, url_prefix='/users/<int:user_id>/posts/<int:post_id>')
 
-@app.route('/')
-def root():
-	return render_template('home.html')

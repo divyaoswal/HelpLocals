@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-<div class="row" class="header">
-	<div class="links">
-			<h3><a href="#">post</a></h3> | 
-			<h3><a href="{{ url_for('users.signup') }}">account</a></h3>
+<div class="container">
+	<div class="row" >
+		<div class="links" id="header">
+				<h3><a href="#">post</a></h3> | 
+				<h3><a href="{{ url_for('users.signup') }}">account</a></h3>
+		</div>	
+		<div id="all_posts">
+			{% for post in posts %}
+				{% for image in post.images %}
+					<img src="{{ image.image }}nth/0/" width=300 height=300>
+				{% endfor %}
+			{% endfor %}		
+		</div>
 	</div>	
 </div>
+
 
 {% endblock %}

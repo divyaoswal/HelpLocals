@@ -1,8 +1,9 @@
-from flask import Blueprint, request, render_template, redirect, url_for, flash, session, g
+from flask import Blueprint, request, render_template, redirect, url_for, flash, session
 from project.users.forms import LoginForm
-from project.models import User
+from project.models import User, Post
 from project import db, bcrypt
 from project.users.forms import CreateAccountForm
+from sqlalchemy import desc
 
 from sqlalchemy.exc import IntegrityError
 
@@ -13,7 +14,13 @@ users_blueprint = Blueprint(
 	template_folder = 'templates'
 )
 
-@users_blueprint.route('/signup', methods=['GET', 'POST'])
+@users_blueprint.route('/')
+def index():
+	# from IPython import embed; embed()
+	posts = Post.query.filter(Post.timestamp != None).order_by(desc(Post.timestamp)).limit(10).all()
+	return render_template('home.html', posts=posts)
+
+@users_blueprint.route('users/signup', methods=['GET', 'POST'])
 def signup():
 	form = CreateAccountForm(request.form)
 	if request.method == 'POST':
@@ -30,7 +37,7 @@ def signup():
 	return render_template('users/signup.html', form=form)
 
 
-@users_blueprint.route('/login', methods=['GET', 'POST'])
+@users_blueprint.route('users/login', methods=['GET', 'POST'])
 def login():
 	form = LoginForm()
 	if request.method == 'POST':
@@ -38,10 +45,9 @@ def login():
 			found_user = User.query.filter_by(email= form.email.data).first()
 			if found_user:
 				authenticated_user = bcrypt.check_password_hash(found_user.password, request.form['password'])
-				# from IPython import embed; embed()
 				if authenticated_user:
 					session["user_id"] = found_user.id
-					return redirect(url_for('posts.post', user_id=found_user.id))
+					return redirect(url_for('posts.new', user_id=found_user.id))
 				flash("Invalid email or password")			
 	return render_template('users/login.html', form=form)	
 
