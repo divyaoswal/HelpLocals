@@ -4,18 +4,25 @@
 <div class="container">
 	<div class="row" >
 		<div class="links" id="header">
-				<h3><a href="#">post</a></h3> | 
-				<h3><a href="{{ url_for('users.signup') }}">account</a></h3>
+				<h3><a href="#">Post</a></h3> | 
+				<h3>
+					<a href="{{ url_for('users.signup') }}">SignUp</a> / 
+					<a href="{{ url_for('users.login') }}">Login
+					</a>
+				</h3>
 		</div>	
 		<div id="all_posts">
-			{% for post in posts %}
-				{% for image in post.images %}
-					<img src="{{ image.image }}nth/0/" width=300 height=300>
-				{% endfor %}
+			{% for post in posts_paginate.items %}
+				<div class="gallery">
+					<a href="{{ url_for('posts.show', user_id=post.user_id, post_id=post.id) }}">
+						<img src="{{ post.images[0].image }}" alt="No image available" width=200 height=200>
+					</a>
+				</div>		
 			{% endfor %}		
 		</div>
 	</div>	
 </div>
 
-
+{{pagination.info}}
+{{ pagination.links }}
 {% endblock %}

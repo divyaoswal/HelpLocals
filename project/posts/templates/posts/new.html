@@ -27,38 +27,19 @@
 			      {% endif %}
 			    </span>
 				</p>	
-		    <p>Street <span class="required">*</span>
-		    {{ post_form.street(placeholder="street") }}
+		    <p>Address <span class="required">*</span>
+		    {{ post_form.address(placeholder="address") }}
 			    <span>
-			      {% if post_form.street.errors %}
-			        {% for error in post_form.street.errors %}
+			      {% if post_form.address.errors %}
+			        {% for error in post_form.address.errors %}
 			          {{ error }}
 			        {% endfor %}
 			      {% endif %}
 			    </span>
 				</p>	
-		    <p>City <span class="required">*</span>
-		    {{ post_form.city(placeholder="city") }}
-			    <span>
-			      {% if post_form.city.errors %}
-			        {% for error in post_form.city.errors %}
-			          {{ error }}
-			        {% endfor %}
-			      {% endif %}
-			    </span>
-				</p>									
+							
 		</fieldset>
 		<fieldset><legend>Item details</legend>
-			<p>Price <span class="required">*</span>
-		     {{ post_form.price(placeholder="price") }}
-			    <span>
-			      {% if post_form.price.errors %}
-			        {% for error in post_form.postTitle.errors %}
-			          {{ error }}
-			        {% endfor %}
-			      {% endif %}
-			    </span>
-				</p>	
 			<p>Item Title <span class="required">*</span>
 		     {{ post_form.title(placeholder="title") }}
 			    <span>

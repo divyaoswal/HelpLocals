@@ -127,4 +127,13 @@ h3{
     margin-bottom: 10px;
 }
 
+.gallery{
+    border-radius: 3px;
+    box-shadow: inset -1px -1px 3px #FF62A7;
+    border: 1px solid #C94A81;
+    overflow: hidden;
+    white-space: normal;
+    vertical-align: top;
+}
+
 

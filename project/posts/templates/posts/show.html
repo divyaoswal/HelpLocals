@@ -4,17 +4,15 @@
 <div class="post">
 	<fieldset>
 		<div class="details">
-			<img src= "{{ post.images[0].image }}nth/0/" width="440" height="500">
+			<img src= "{{ post.images[0].image }}" alt="No image available" width="440" height="500">
 		</div>
 		<div class="details">
-			<h3> Price: {{ post.price }} </h3>
 			<h3> Title: {{ post.title }} </h3>
 			<h3> Desription: {{ post.description }} </h3>
 			<h3> Contact Name: {{ post.contactName }} </h3>
-			<h3> Street: {{ post.street }} </h3>
-			<h3> City: {{ post.city }} </h3>
-			<h3> Zipcode: {{ user.zipcode }} </h3>
-			<h3> Email: {{ user.email }} </h3>
+			<h3> Address: {{ post.address }} </h3>
+			<h3> Email: {{ post.contactEmail }} </h3>
+			<h3> Call: {{ post.phoneNo }}</h3>
 		</div>
 	</fieldset>
 </div>	

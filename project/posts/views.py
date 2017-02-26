@@ -16,7 +16,13 @@ def new(user_id):
 	post_form = PostForm(request.form)
 	if request.method == 'POST':
 		if post_form.validate_on_submit():
-			post_obj = Post(request.form['contactName'], request.form['phoneNo'], request.form['street'], request.form['city'], request.form['price'], request.form['title'], request.form['description'], user_id)
+			post_obj = Post(
+				contactName=request.form['contactName'], 
+				phoneNo=request.form['phoneNo'], 
+				address=request.form['address'], 
+				title=request.form['title'], 
+				description=request.form['description'], 
+				user_id=user_id)
 			db.session.add(post_obj)
 			db.session.commit()
 			return redirect(url_for('images.upload_files', user_id=user_id, post_id=post_obj.id))

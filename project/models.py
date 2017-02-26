@@ -23,22 +23,20 @@ class Post(db.Model):
 
 	id = db.Column(db.Integer, primary_key = True)
 	contactName = db.Column(db.Text)
-	phoneNo = db.Column(db.Integer)
-	street = db.Column(db.Text)
-	city = db.Column(db.Text)
-	price = db.Column(db.Integer)
+	phoneNo = db.Column(db.Text)
+	contactEmail = db.Column(db.Text)
+	address = db.Column(db.Text)
 	title = db.Column(db.Text)
 	description = db.Column(db.Text)
 	timestamp = db.Column(db.DateTime)
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))  #what is users in users.id
 	images = db.relationship('Image', lazy='dynamic')
 
-	def __init__(self, contactName, phoneNo, street, city, price, title, description,user_id, timestamp=datetime.utcnow()):
+	def __init__(self, contactName=None, phoneNo=None, contactEmail=None, address=None, title=None, description=None, user_id=None, timestamp=datetime.utcnow()):
 		self.contactName = contactName
 		self.phoneNo = phoneNo
-		self.street = street
-		self.city = city
-		self.price = price
+		self.contactEmail = contactEmail
+		self.address = address
 		self.title = title
 		self.description = description
 		self.timestamp = timestamp
@@ -56,6 +54,9 @@ class Image(db.Model):
 	def __init__(self, image, post_id):
 		self.image = image
 		self.post_id = post_id
+
+
+	
 
 
 

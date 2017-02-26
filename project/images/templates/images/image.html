@@ -11,7 +11,7 @@
 			{{ upload_form.csrf_token }}
 			<div class="upload">
 				<fieldset>
-				<input type="hidden" data-multiple="true" role="uploadcare-uploader" name="image" />
+				<input type="hidden" data-multiple="false" role="uploadcare-uploader" name="image" />
 				    <p>
 					    <span>
 					      {% if upload_form.image.errors %}

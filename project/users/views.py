@@ -1,10 +1,10 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash, session
 from project.users.forms import LoginForm
-from project.models import User, Post
+from project.models import User, Post, Image
 from project import db, bcrypt
 from project.users.forms import CreateAccountForm
 from sqlalchemy import desc
-
+from flask_paginate import Pagination
 from sqlalchemy.exc import IntegrityError
 
 
@@ -14,11 +14,28 @@ users_blueprint = Blueprint(
 	template_folder = 'templates'
 )
 
+PER_PAGE = 28
+
 @users_blueprint.route('/')
 def index():
-	# from IPython import embed; embed()
-	posts = Post.query.filter(Post.timestamp != None).order_by(desc(Post.timestamp)).limit(10).all()
-	return render_template('home.html', posts=posts)
+	posts_query = Post.query.filter(Post.timestamp != None).order_by(desc(Post.timestamp))
+	page = request.args.get('page', type=int, default=1)
+	# total = 0
+	# recent_posts_id = []
+	# for post in posts_query:
+	# 	recent_posts_id.append(post.id)
+	# recent_posts_ids_images = Image.query.filter(Image.post_id.in_(recent_posts_id))
+	# total = recent_posts_ids_images.count()
+	# image_paginate = recent_posts_ids_images.paginate(per_page=4, page=page)
+	posts_paginate = posts_query.paginate(per_page=PER_PAGE, page=page)	
+	pagination = Pagination(page=page, per_page=PER_PAGE, total=posts_query.count())
+	return render_template('home.html',  pagination=pagination, posts_paginate=posts_paginate)
+
+
+@users_blueprint.route('/<page>')
+def page():
+	pass
+
 
 @users_blueprint.route('users/signup', methods=['GET', 'POST'])
 def signup():
