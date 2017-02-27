@@ -11,7 +11,7 @@ bcrypt = Bcrypt(app)
 CsrfProtect(app)
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/help_locals_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgres://localhost/help_locals_db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['TEMPLATES_AUTO_RELOAD'] = True
