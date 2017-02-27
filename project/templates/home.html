@@ -1,28 +1,78 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container">
-	<div class="row" >
-		<div class="links" id="header">
-				<h3><a href="#">Post</a></h3> | 
-				<h3>
-					<a href="{{ url_for('users.signup') }}">SignUp</a> / 
-					<a href="{{ url_for('users.login') }}">Login
-					</a>
-				</h3>
-		</div>	
-		<div id="all_posts">
-			{% for post in posts_paginate.items %}
-				<div class="gallery">
-					<a href="{{ url_for('posts.show', user_id=post.user_id, post_id=post.id) }}">
-						<img src="{{ post.images[0].image }}" alt="No image available" width=200 height=200>
-					</a>
-				</div>		
-			{% endfor %}		
-		</div>
-	</div>	
-</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header page-scroll">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	        </button>
+	        <a class="navbar-brand" href="#page-top">Help_Locals</a>
+	    </div>
+	        <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	        <ul class="nav navbar-nav navbar-right">
+	            <li class="hidden">
+	                <a href="#page-top"></a>
+	            </li>
+	            <li class="page-scroll">
+	                <a href="{{ url_for('users.signup') }}">SignUp   |</a>
+	            </li>
+	            <li class="page-scroll">
+	                <a href="{{ url_for('users.login') }}">Login</a>
+	            </li>
+	            <li class="page-scroll">
+	                <a href="#contact">Post</a>
+	            </li>
+	        </ul>
+	    </div>
+	        <!-- /.navbar-collapse -->
+	</div> 
+</nav>
+<header id="page-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 logo">
+                <img class="img-responsive" src="http://cdn.trustedpartner.com/images/library/Bocahelpinghands2010/News/Non-profit%20partners%20hands%20with%20hearts%20clip%20art.png" alt="">
+                <div class="intro-text">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-{{pagination.info}}
-{{ pagination.links }}
+<div class="content-wrapper">
+    <section class="primary" id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>GET YOUR FREE STUFF</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+			<div id="all_posts">
+				{% for post in posts_paginate.items %}
+					<div class="col-lg-3 col-md-4 col-xs-6">
+						<a class="thumbnail" href="{{ url_for('posts.show', user_id=post.user_id, post_id=post.id) }}">
+							<img class="img-responsive" src="{{ post.images[0].image }}" alt="No image available" width=200 height=200>
+							<div class="caption">
+								<p>{{ post.title }}
+									<span>{{ post.address }}</span>
+								</p>
+							</div>
+						</a>
+					</div>		
+				{% endfor %}		
+			</div>
+		</div>	
+    </section>
+    {{pagination.info}}
+	{{ pagination.links }}
+</div>        
+
+
+
 {% endblock %}
